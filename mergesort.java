@@ -1,20 +1,20 @@
-Class mergeSort {
+import java.util.*;
 
-
+public class mergeSort {
     public static void main(String[] args) {
-        int[] array = new int[]{5,7, 8, 31, 4, 65, 7, 2, 4, 73};
-        int[] sorted = mergeSort(array, 0, array.length - 1);
+        int[] array = new int[]{5, 7, 8, 31, 4, 65, 7, 2, 4, 73, 1};
+        int[] sorted = mergeSort(array, 0, array.length);
 
-        System.out.println(array);
-        System.out.println(sorted);
+        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(sorted));
     }
 
     public static int[] mergeSort(int[] array, int start, int end) {
-        if (end - start == 1) {
+        if (end - start <= 1) {
             return new int[]{array[start]};
         } else {
             int[] firstHalf = mergeSort(array, start, (start + end) / 2);
-            int[] secondHalf = mergeSort(array, (start + end) / 2 + 1, end);
+            int[] secondHalf = mergeSort(array, (start + end) / 2, end);
             int[] merged = new int[firstHalf.length + secondHalf.length];
             int firstIndex = 0; 
             int secondIndex = 0;
