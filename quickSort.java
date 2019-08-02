@@ -11,29 +11,49 @@ public class quickSort {
    }
 
    public static void quickSort(int[] array, int start, int end) {
-      if (start < end) {
+      if (end - start > 1) {
          int pivot = (start + end) / 2;
+         int pivotVal = array[pivot];
          swap(array, start, pivot);
          int left = start + 1;
          int right = end - 1;
-      
-         while (left < right) {
+         if (right - left > 1) {   
          
+            while (left < right) {
+            
+               while (array[left] <= pivotVal) {
+                  left++;
+               }
+               if (left == right) {
+                  left--;
+               }
+               while (array[right] >= pivotVal) {
+                  right--;
+               }
+               if (right == start + 1) {
+                  right++;
+               }
+               if (array[left] > pivotVal && array[right] < pivotVal) {
+                  swap(array, left, right);
+               }
+            /*
             if (array[right] < array[start] && array[left] > array[start]) {
                swap(array, left, right);
             }
-         
+            
             if (array[left] <= array[start]) {
                left++;
             }
             if (array[right] >= array[start]) {
                right--;
             }
-         
+            */
+            
+            }
+            swap(array, start, left);
+            quickSort(array, start, left);
+            quickSort(array, left - 1, end);
          }
-         swap(array, start, left);
-         quickSort(array, start, left);
-         quickSort(array, left, end);
       }
    }
 
