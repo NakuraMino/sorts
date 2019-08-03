@@ -3,57 +3,38 @@ import java.util.*;
 public class quickSort {
 
    public static void main(String[] args) {
-      int[] array = new int[]{5, 7, 8, 31, 4, 65, 7, 2, 4, 73};
+      int[] array = new int[]{5, 7, 8, 31, 10};
       System.out.println(Arrays.toString(array));
-      quickSort(array, 0, array.length);
+      quickSort(array, 0, array.length - 1);
       System.out.println(Arrays.toString(array));
    
    }
 
    public static void quickSort(int[] array, int start, int end) {
-      if (end - start > 1) {
-         int pivot = (start + end) / 2;
-         int pivotVal = array[pivot];
-         swap(array, start, pivot);
-         int left = start + 1;
+      if (end - start >= 1) {
+         int left = start; 
          int right = end - 1;
-         if (right - left > 1) {   
+         int pivot = array[end];
          
-            while (left < right) {
+         while (left <= right) {
             
-               while (array[left] <= pivotVal) {
-                  left++;
-               }
-               if (left == right) {
-                  left--;
-               }
-               while (array[right] >= pivotVal) {
-                  right--;
-               }
-               if (right == start + 1) {
-                  right++;
-               }
-               if (array[left] > pivotVal && array[right] < pivotVal) {
-                  swap(array, left, right);
-               }
-            /*
-            if (array[right] < array[start] && array[left] > array[start]) {
-               swap(array, left, right);
-            }
-            
-            if (array[left] <= array[start]) {
+            if (array[left] <= pivot) {
                left++;
             }
-            if (array[right] >= array[start]) {
+            
+            if (array[right] >= pivot) {
                right--;
             }
-            */
             
+            if (array[left] > pivot && array[right] < pivot) {
+               swap(array, left, right);
+               left++;
+               right--;
             }
-            swap(array, start, left);
-            quickSort(array, start, left);
-            quickSort(array, left - 1, end);
          }
+         swap(array, left, end);
+         quickSort(array, start, left - 1);
+         quickSort(array, left + 1, end);
       }
    }
 
